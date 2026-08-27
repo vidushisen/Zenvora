@@ -1,0 +1,95 @@
+/* Custom DeepFocus Glassmorphism & Theme Styles */
+
+@layer utilities {
+  .glass-panel {
+    background: rgba(15, 23, 42, 0.65);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
+  .glass-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .glow-text-indigo {
+    text-shadow: 0 0 20px rgba(99, 102, 241, 0.6);
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(8, 12, 20, 0.4);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.4);
+}
+
+/* Audio Slider Custom Styling */
+input[type=range] {
+  -webkit-appearance: none;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 9999px;
+  outline: none;
+}
+
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #6366F1;
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(99, 102, 241, 0.8);
+  transition: transform 0.15s ease, background-color 0.15s ease;
+}
+
+input[type=range]::-webkit-slider-thumb:hover {
+  transform: scale(1.25);
+  background: #818CF8;
+}
+
+/* Theme Background Preset Color Variations */
+body.theme-cozy-rain {
+  background: radial-gradient(circle at 50% 20%, #0F172A 0%, #080C14 100%);
+}
+
+body.theme-lofi-cafe {
+  background: radial-gradient(circle at 50% 20%, #2A170F 0%, #0F0804 100%);
+}
+
+body.theme-midnight-forest {
+  background: radial-gradient(circle at 50% 20%, #062319 0%, #030F0A 100%);
+}
+
+body.theme-cyberpunk-neon {
+  background: radial-gradient(circle at 50% 20%, #1A092A 0%, #090310 100%);
+}
+
+/* Active Theme Card */
+.theme-card.active {
+  border-color: rgba(99, 102, 241, 0.8);
+  background: rgba(99, 102, 241, 0.15);
+  color: #FFFFFF;
+}
+
+/* Task Checkbox Strike */
+.task-item.completed span {
+  text-decoration: line-through;
+  opacity: 0.5;
+}

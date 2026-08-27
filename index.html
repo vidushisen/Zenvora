@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zenvora - Ambient Focus & Meditation Studio</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎧</text></svg>">
+
+  <!-- Tailwind CSS CDN & Lucide Icons -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/main.css">
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            focus: {
+              dark: '#080C14',
+              card: 'rgba(15, 23, 42, 0.65)',
+              border: 'rgba(255, 255, 255, 0.12)',
+              indigo: '#6366F1',
+              teal: '#14B8A6',
+              rose: '#F43F5E',
+              amber: '#F59E0B'
+            }
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            mono: ['"Fira Code"', 'monospace']
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="theme-cozy-rain bg-focus-dark text-slate-100 min-h-screen overflow-x-hidden font-sans antialiased relative selection:bg-indigo-500 selection:text-white">
+
+  <!-- Dynamic Rain & Ambient Canvas -->
+  <canvas id="ambient-canvas" class="fixed inset-0 w-full h-full pointer-events-none z-0"></canvas>
+
+  <!-- Background Ambient Lights & Overlays -->
+  <div id="theme-overlay" class="fixed inset-0 pointer-events-none transition-all duration-1000 z-0"></div>
+
+  <!-- Main Container -->
+  <div class="relative z-10 min-h-screen flex flex-col justify-between p-4 md:p-8 max-w-7xl mx-auto">
+    
+    <!-- Top Navigation Bar -->
+    <header class="flex flex-wrap items-center justify-between gap-4 p-4 rounded-2xl glass-panel shadow-2xl mb-6 border border-white/10">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 to-teal-400 flex items-center justify-center shadow-lg shadow-indigo-500/30">
+          <i data-lucide="headphones" class="w-5 h-5 text-white"></i>
+        </div>
+        <div>
+          <h1 class="text-xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white via-slate-200 to-indigo-300">Zenvora</h1>
+          <p class="text-xs text-indigo-300/80 font-medium">Ambient Focus & Meditation Studio</p>
+        </div>
+      </div>
+
+      <!-- Presets & Quick Action Controls -->
+      <div class="flex flex-wrap items-center gap-2">
+
+
+        <!-- Master Mute Toggle -->
+        <button id="master-mute-btn" class="p-2.5 rounded-xl glass-card text-slate-300 hover:text-white hover:bg-white/10 transition border border-white/10" title="Toggle Sound Engine">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-emerald-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
+        </button>
+
+        <!-- Sidebar Scratchpad Toggle -->
+        <button id="toggle-sidebar-btn" class="p-2.5 rounded-xl glass-card text-slate-300 hover:text-white hover:bg-white/10 transition border border-white/10" title="Toggle Notes & To-Do">
+          <i data-lucide="notebook-pen" class="w-4 h-4 text-indigo-400"></i>
+        </button>
+
+        <!-- Fullscreen Mode Toggle -->
+        <button id="fullscreen-btn" class="p-2.5 rounded-xl glass-card text-slate-300 hover:text-white hover:bg-white/10 transition border border-white/10" title="Full Screen (F)">
+          <i data-lucide="maximize-2" class="w-4 h-4 text-teal-400"></i>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Workspace Grid -->
+    <main class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start my-auto">
+      
+      <!-- Left Column: Soundboard Mixer & Themes -->
+      <section class="lg:col-span-4 space-y-6">
+        
+        <!-- Soundboard Mixer Card -->
+        <div class="glass-panel p-5 rounded-2xl border border-white/10 shadow-2xl">
+          <div class="flex items-center justify-between mb-4">
+            <h2 class="text-sm font-bold tracking-wider uppercase text-indigo-300 flex items-center gap-2">
+              <i data-lucide="sliders" class="w-4 h-4"></i> Soundscape Mixer
+            </h2>
+            <button id="reset-mixer-btn" class="text-xs text-slate-400 hover:text-slate-200 transition">Reset All</button>
+          </div>
+
+          <div class="space-y-4" id="sound-sliders-container">
+            <!-- Sound Slider Item: Rain -->
+            <div class="sound-control-item bg-white/5 p-3 rounded-xl border border-white/5 hover:border-white/10 transition">
+              <div class="flex items-center justify-between text-xs font-semibold mb-2">
+                <span class="flex items-center gap-2 text-slate-200">
+                  <i data-lucide="cloud-rain" class="w-4 h-4 text-blue-400"></i> Rain Sound
+                </span>
+                <span class="text-indigo-400 font-mono sound-vol-text">60%</span>
+              </div>
+              <input type="range" min="0" max="100" value="60" data-sound="rain" class="w-full h-1.5 bg-slate-700 rounded-lg appearance-none cursor-pointer">
+            </div>
+
+            <!-- Sound Slider Item: Thunder -->
+            <div class="sound-control-item bg-white/5 p-3 rounded-xl border border-white/5 hover:border-white/10 transition">
+              <div class="flex items-center justify-between text-xs font-semibold mb-2">
+                <span class="flex items-center gap-2 text-slate-200">
+                  <i data-lucide="cloud-lightning" class="w-4 h-4 text-amber-400"></i> Thunder Rumbles
+                </span>
+                <span class="text-indigo-400 font-mono sound-vol-text">30%</span>
+              </div>
+              <input type="range" min="0" max="100" value="30" data-sound="thunder" class="w-full h-1.5 bg-slate-700 rounded-lg appearance-none cursor-pointer">
+            </div>
+
+            <!-- Sound Slider Item: Campfire -->
+            <div class="sound-control-item bg-white/5 p-3 rounded-xl border border-white/5 hover:border-white/10 transition">
+              <div class="flex items-center justify-between text-xs font-semibold mb-2">
+                <span class="flex items-center gap-2 text-slate-200">
+                  <i data-lucide="flame" class="w-4 h-4 text-rose-400"></i> Fireplace Crackle
+                </span>
+                <span class="text-indigo-400 font-mono sound-vol-text">20%</span>
+              </div>
+              <input type="range" min="0" max="100" value="20" data-sound="fire" class="w-full h-1.5 bg-slate-700 rounded-lg appearance-none cursor-pointer">
+            </div>
+
+            <!-- Sound Slider Item: Lo-Fi Synth Chords -->
+            <div class="sound-control-item bg-white/5 p-3 rounded-xl border border-white/5 hover:border-white/10 transition">
+              <div class="flex items-center justify-between text-xs font-semibold mb-2">
+                <span class="flex items-center gap-2 text-slate-200">
+                  <i data-lucide="music" class="w-4 h-4 text-teal-400"></i> Lo-Fi Synth Pads
+                </span>
+                <span class="text-indigo-400 font-mono sound-vol-text">50%</span>
+              </div>
+              <input type="range" min="0" max="100" value="50" data-sound="synth" class="w-full h-1.5 bg-slate-700 rounded-lg appearance-none cursor-pointer">
+            </div>
+
+            <!-- Sound Slider Item: Forest Wind -->
+            <div class="sound-control-item bg-white/5 p-3 rounded-xl border border-white/5 hover:border-white/10 transition">
+              <div class="flex items-center justify-between text-xs font-semibold mb-2">
+                <span class="flex items-center gap-2 text-slate-200">
+                  <i data-lucide="wind" class="w-4 h-4 text-emerald-400"></i> Forest Wind
+                </span>
+                <span class="text-indigo-400 font-mono sound-vol-text">15%</span>
+              </div>
+              <input type="range" min="0" max="100" value="15" data-sound="wind" class="w-full h-1.5 bg-slate-700 rounded-lg appearance-none cursor-pointer">
+            </div>
+
+            <!-- Sound Slider Item: Relaxing Birds -->
+            <div class="sound-control-item bg-white/5 p-3 rounded-xl border border-white/5 hover:border-white/10 transition">
+              <div class="flex items-center justify-between text-xs font-semibold mb-2">
+                <span class="flex items-center gap-2 text-slate-200">
+                  <i data-lucide="bird" class="w-4 h-4 text-lime-400"></i> Forest Birds Chirping
+                </span>
+                <span class="text-indigo-400 font-mono sound-vol-text">40%</span>
+              </div>
+              <input type="range" min="0" max="100" value="40" data-sound="birds" class="w-full h-1.5 bg-slate-700 rounded-lg appearance-none cursor-pointer">
+            </div>
+
+            <!-- Sound Slider Item: Meditation Singing Bowl -->
+            <div class="sound-control-item bg-white/5 p-3 rounded-xl border border-white/5 hover:border-white/10 transition">
+              <div class="flex items-center justify-between text-xs font-semibold mb-2">
+                <span class="flex items-center gap-2 text-slate-200">
+                  <i data-lucide="heart-pulse" class="w-4 h-4 text-purple-400"></i> Meditation Singing Bowl
+                </span>
+                <span class="text-indigo-400 font-mono sound-vol-text">50%</span>
+              </div>
+              <input type="range" min="0" max="100" value="50" data-sound="meditation" class="w-full h-1.5 bg-slate-700 rounded-lg appearance-none cursor-pointer">
+            </div>
+          </div>
+        </div>
+
+        <!-- Theme Picker Grid -->
+        <div class="glass-panel p-5 rounded-2xl border border-white/10 shadow-2xl">
+          <h2 class="text-sm font-bold tracking-wider uppercase text-indigo-300 mb-3 flex items-center gap-2">
+            <i data-lucide="palette" class="w-4 h-4"></i> Visual Ambience Theme
+          </h2>
+          <div class="grid grid-cols-2 gap-2.5">
+            <button class="theme-card active flex items-center gap-2.5 p-3 rounded-xl border border-indigo-500/50 bg-indigo-500/10 text-xs font-semibold transition" data-theme="cozy-rain">
+              <span class="w-3 h-3 rounded-full bg-blue-500 shadow-sm shadow-blue-500"></span>
+              <span>Cozy Rain</span>
+            </button>
+            <button class="theme-card flex items-center gap-2.5 p-3 rounded-xl border border-white/10 bg-white/5 text-xs font-semibold text-slate-300 hover:bg-white/10 transition" data-theme="lofi-cafe">
+              <span class="w-3 h-3 rounded-full bg-amber-500 shadow-sm shadow-amber-500"></span>
+              <span>Lo-Fi Cafe</span>
+            </button>
+            <button class="theme-card flex items-center gap-2.5 p-3 rounded-xl border border-white/10 bg-white/5 text-xs font-semibold text-slate-300 hover:bg-white/10 transition" data-theme="midnight-forest">
+              <span class="w-3 h-3 rounded-full bg-emerald-500 shadow-sm shadow-emerald-500"></span>
+              <span>Deep Forest</span>
+            </button>
+            <button class="theme-card flex items-center gap-2.5 p-3 rounded-xl border border-white/10 bg-white/5 text-xs font-semibold text-slate-300 hover:bg-white/10 transition" data-theme="cyberpunk-neon">
+              <span class="w-3 h-3 rounded-full bg-fuchsia-500 shadow-sm shadow-fuchsia-500"></span>
+              <span>Cyberpunk</span>
+            </button>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- Center Column: Pomodoro Focus Ring Timer -->
+      <section class="lg:col-span-5 flex flex-col items-center justify-center space-y-6">
+        
+        <div class="glass-panel p-8 md:p-10 rounded-3xl border border-white/10 shadow-2xl w-full flex flex-col items-center relative overflow-hidden text-center">
+          
+          <!-- Timer Mode Switcher -->
+          <div class="flex items-center gap-1.5 p-1.5 rounded-2xl glass-card border border-white/10 mb-8 max-w-xs w-full">
+            <button class="timer-mode-btn active flex-1 py-2 rounded-xl text-xs font-bold transition bg-indigo-600 text-white shadow-lg shadow-indigo-600/30" data-mode="focus" data-minutes="25">
+              Focus (25m)
+            </button>
+            <button class="timer-mode-btn flex-1 py-2 rounded-xl text-xs font-semibold transition text-slate-400 hover:text-white" data-mode="short-break" data-minutes="5">
+              Short (5m)
+            </button>
+            <button class="timer-mode-btn flex-1 py-2 rounded-xl text-xs font-semibold transition text-slate-400 hover:text-white" data-mode="long-break" data-minutes="15">
+              Long (15m)
+            </button>
+          </div>
+
+          <!-- Circular Progress Ring SVG -->
+          <div class="relative w-64 h-64 md:w-72 md:h-72 flex items-center justify-center my-2">
+            <svg class="w-full h-full -rotate-90 transform" viewBox="0 0 100 100">
+              <!-- Background Circle -->
+              <circle cx="50" cy="50" r="44" stroke="currentColor" stroke-width="4" fill="transparent" class="text-slate-800/80"></circle>
+              <!-- Progress Circle -->
+              <circle id="timer-progress-ring" cx="50" cy="50" r="44" stroke="currentColor" stroke-width="4.5" stroke-dasharray="276.46" stroke-dashoffset="0" stroke-linecap="round" fill="transparent" class="text-indigo-500 transition-all duration-1000 shadow-indigo-500/50"></circle>
+            </svg>
+
+            <!-- Digital Time Display -->
+            <div class="absolute flex flex-col items-center justify-center">
+              <span id="timer-display" class="text-5xl md:text-6xl font-extrabold tracking-tighter font-mono text-white glow-text-indigo">25:00</span>
+              <span id="timer-status-text" class="text-xs uppercase tracking-widest text-indigo-300 font-semibold mt-2">Deep Focus Session</span>
+            </div>
+          </div>
+
+          <!-- Controls: Start/Pause & Reset -->
+          <div class="flex items-center gap-4 mt-6">
+            <button id="reset-timer-btn" class="p-3.5 rounded-2xl glass-card text-slate-300 hover:text-white hover:bg-white/10 transition border border-white/10" title="Reset Timer">
+              <i data-lucide="rotate-ccw" class="w-5 h-5"></i>
+            </button>
+
+            <button id="toggle-timer-btn" class="px-8 py-3.5 rounded-2xl bg-gradient-to-r from-indigo-600 via-indigo-500 to-teal-500 text-white font-bold text-sm shadow-xl shadow-indigo-500/30 hover:scale-105 active:scale-95 transition flex items-center gap-2">
+              <i id="play-pause-icon" data-lucide="play" class="w-5 h-5 fill-current"></i>
+              <span id="timer-btn-text">Start Focus</span>
+            </button>
+
+            <button id="skip-timer-btn" class="p-3.5 rounded-2xl glass-card text-slate-300 hover:text-white hover:bg-white/10 transition border border-white/10" title="Complete Session">
+              <i data-lucide="skip-forward" class="w-5 h-5"></i>
+            </button>
+          </div>
+
+          <!-- Session Stats Summary -->
+          <div class="flex items-center justify-center gap-6 mt-8 pt-6 border-t border-white/10 w-full text-xs text-slate-400">
+            <div>
+              <span class="block text-white font-bold text-base font-mono" id="completed-sessions-count">0</span>
+              <span class="text-[10px] uppercase tracking-wider">Sessions Done</span>
+            </div>
+            <div class="w-px h-6 bg-white/10"></div>
+            <div>
+              <span class="block text-white font-bold text-base font-mono" id="total-focus-minutes">0m</span>
+              <span class="text-[10px] uppercase tracking-wider">Focus Time</span>
+            </div>
+          </div>
+
+        </div>
+
+      </section>
+
+      <!-- Right Column: Quick Notes & Study Checklist -->
+      <section id="sidebar-container" class="lg:col-span-3 space-y-6">
+        
+        <!-- Today's Focus Tasks Card -->
+        <div class="glass-panel p-5 rounded-2xl border border-white/10 shadow-2xl">
+          <div class="flex items-center justify-between mb-3">
+            <h2 class="text-sm font-bold tracking-wider uppercase text-indigo-300 flex items-center gap-2">
+              <i data-lucide="check-square" class="w-4 h-4 text-teal-400"></i> Study Tasks
+            </h2>
+            <span class="text-xs text-slate-400 font-mono" id="tasks-progress-badge">0/0</span>
+          </div>
+
+          <!-- Add Task Input -->
+          <form id="add-task-form" class="flex gap-2 mb-3">
+            <input type="text" id="task-input" placeholder="Add study target (e.g. Ch 4 Numerical)" class="flex-1 bg-black/30 border border-white/15 rounded-xl px-3 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500 transition">
+            <button type="submit" class="px-3 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs transition">
+              <i data-lucide="plus" class="w-4 h-4"></i>
+            </button>
+          </form>
+
+          <!-- Task List Container -->
+          <ul id="task-list" class="space-y-2 max-h-48 overflow-y-auto pr-1">
+            <!-- Dynamic task items injected via JS -->
+          </ul>
+        </div>
+
+        <!-- Quick Study Scratchpad -->
+        <div class="glass-panel p-5 rounded-2xl border border-white/10 shadow-2xl">
+          <div class="flex items-center justify-between mb-2">
+            <h2 class="text-sm font-bold tracking-wider uppercase text-indigo-300 flex items-center gap-2">
+              <i data-lucide="edit-3" class="w-4 h-4 text-amber-400"></i> Quick Scratchpad
+            </h2>
+            <span class="text-[10px] text-emerald-400 font-medium flex items-center gap-1">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> Auto-saved
+            </span>
+          </div>
+          <textarea id="scratchpad-textarea" placeholder="Jot down quick formulas, doubt questions, or key points here..." class="w-full h-36 bg-black/30 border border-white/15 rounded-xl p-3 text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:border-indigo-500 resize-none font-mono transition"></textarea>
+        </div>
+
+      </section>
+
+    </main>
+
+    <!-- Bottom Footer: Motivational Quote Ticker -->
+    <footer class="mt-6 p-4 rounded-2xl glass-panel border border-white/10 shadow-xl flex flex-wrap items-center justify-between gap-4 text-xs">
+      <div class="flex items-center gap-3 flex-1 min-w-[280px]">
+        <div class="w-7 h-7 rounded-lg bg-amber-500/20 text-amber-400 flex items-center justify-center flex-shrink-0">
+          <i data-lucide="quote" class="w-4 h-4"></i>
+        </div>
+        <p id="quote-text" class="text-slate-300 italic flex-1 font-medium">"Consistency is what transforms average into excellence."</p>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <button id="refresh-quote-btn" class="p-2 rounded-lg glass-card text-slate-400 hover:text-white transition" title="New Quote">
+          <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i>
+        </button>
+        <span class="text-[10px] text-slate-500 font-mono">Zenvora v1.0 • Vidushi Learning</span>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- JavaScript App Files -->
+  <script src="js/audioEngine.js"></script>
+  <script src="js/rainCanvas.js"></script>
+  <script src="js/quotes.js"></script>
+  <script src="js/pomodoro.js"></script>
+  <script src="js/soundboard.js"></script>
+  <script src="js/scratchpad.js"></script>
+  <script src="js/themes.js"></script>
+  <script src="js/app.js"></script>
+
+</body>
+</html>
