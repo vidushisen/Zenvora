@@ -58,5 +58,5 @@ deep-focus-app/
 
 1. Open [`index.html`](file:///E:/Vidushi_Learning/deep-focus-app/index.html) directly in any web browser.
 2. Or start a local server: `python -m http.server 8080` and navigate to `http://localhost:8080`.
-
+             
 Developed for **Vidushi Learning**.             
