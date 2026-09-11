@@ -1,62 +1,78 @@
-# 🌿 Zenvora - Ambient Focus & Meditation Studio
+<div align="center">
+<!-- HERO BOX (EMERALD GREEN THEME) -->
+<img src="https://capsule-render.vercel.app/api?type=rounded&color=0a1612&stroke=00E676&strokeWidth=2&height=160&section=header&text=%E2%9C%A6%20Welcome%20to%20Zenvora%20%E2%9C%A6&fontSize=42&fontColor=00E676&fontAlignY=50" width="100%"/>
+<br/><br/>
+<!-- ANIMATED FEATURES TYPING (GREEN) -->
+<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=20&duration=2500&pause=1000&color=00E676&center=true&vCenter=true&width=650&lines=Procedural+Rain+%26+Campfire+Audio+Mixer;Warm+Lo-Fi+Beats+%26+432Hz+Meditation;Aesthetic+Pomodoro+for+Deep+Study;Study+Target+Scratchpad+%26+Streak+Logs" alt="Zenvora Features" />
+<br/><br/>
+<!-- CLEAN GREEN & DARK BADGES -->
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript">
+  <img src="https://img.shields.io/badge/JavaScript-ES6+-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" alt="JavaScript"/>
+</a>
+&nbsp;
+<img src="https://img.shields.io/badge/Web_Audio_API-Procedural_Synth-00E676?style=for-the-badge&logo=spotify&logoColor=white" alt="Web Audio"/>
+&nbsp;
+<img src="https://img.shields.io/badge/UI-Calm_Glassmorphism-059669?style=for-the-badge" alt="Glassmorphism"/>
+&nbsp;
+<img src="https://img.shields.io/badge/Privacy-100%25_Local-10B981?style=for-the-badge" alt="Privacy"/>
+<br/><br/>
+<!-- BIG ACTION BUTTONS -->
+<a href="https://vidushisen.github.io/Zenvora/" target="_blank">
+  <img src="https://img.shields.io/badge/🎧_ENTER_SANCTUARY-00C853?style=for-the-badge&logoColor=white" height="40" alt="Live App"/>
+</a>
+&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="https://github.com/vidushisen/Zenvora/stargazers">
+  <img src="https://img.shields.io/badge/⭐_STAR_ZENVORA-00E676?style=for-the-badge&logoColor=black" height="40" alt="Star Zenvora"/>
+</a>
+<br/><br/>
+</div>
+<!-- SLEEK DIVIDER -->
+<img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="100%">
+<br/><br/>
+<div align="center">
+💚 About Zenvora 💚
+</div>
+<br/>
+ ** Zenvora ** is a minimalist ambient focus studio designed to eliminate digital noise. It combines procedural nature soundscapes, warm lo-fi chords, and a Pomodoro timer to help students and deep workers stay in the flow state.
+<br/><br/>
+<div align="center">
+🌿 Soundscapes & Key Features 🌿
+</div>
+<br/>
+* 🌧️ **Layered Nature Soundscapes**  
+  Independently mix cozy rain, thunder rumbles, forest wind, bird calls, and fireplace crackles.
+<br/>
+* 🧘 **432Hz Meditation & Lo-Fi**  
+  Harmonic healing frequency vibrations and lo-fi synth pads to stimulate alpha brainwaves.
+<br/>
+* ⏱️ **Aesthetic Pomodoro Timer**  
+  25/5 interval focus cycles with animated progress rings and peaceful completion chimes.
+<br/>
+* 📝 **Study Targets & Scratchpad**  
+  Built-in task checklist and quick note scratchpad saved automatically in local browser memory.
+<br/><br/>
+<div align="center">
+🛠️ Tech Stack 🛠️
+</div>
+<br/>
+✦ Modern JavaScript (ES6+) ✦ Web Audio API ✦ HTML5 Canvas Particles ✦ LocalStorage
 
-> *"Your personal sanctuary for deep focus, ambient soundscapes, and mindfulness."*
 
-**Zenvora** is a modern, aesthetic ambient studio web application designed to eliminate distractions and create the ideal environment for study, deep work, and relaxation.
 
----
+<br/><br/>
+<div align="center">
+🚀 Quick Run 🚀
+</div>
+<br/>
 
-## ✨ Features
+ 1. Clone repository
+git clone https://github.com/vidushisen/Zenvora.git
+ 2. Enter folder
+cd Zenvora
+ 3. Open in browser (or Live Server)
+ Open index.html
 
-- **🎵 Procedural Offline Soundscape Engine:**
-  - 🌧️ **Cozy Rain:** Filtered pink noise sound generator
-  - ⚡ **Thunder Rumbles:** Low-frequency periodic rumbles
-  - 🔥 **Fireplace Crackle:** Filtered spark click soundscape
-  - 🎹 **Lo-Fi Synth Pads:** Warm pentatonic ambient chord oscillators
-  - 🍃 **Forest Wind:** Modulated bandpass wind swaths
-  - 🐦 **Realistic Forest Birds:** 3D spatial multi-species bird call trills
-  - 🧘 **Meditation Singing Bowl:** 432Hz healing Tibetan bowl frequency vibrations
 
-- **⏱️ Aesthetic Pomodoro Focus Timer:**
-  - Animated SVG circular progress ring
-  - Customizable intervals: *Focus (25m)*, *Short Break (5m)*, and *Long Break (15m)*
-  - Harmonic completion chime alert & session statistics counter
 
-- **🎨 Ambient Themes & Particles:**
-  - Animated falling rain drops & floating embers on HTML5 Canvas
-  - Visual theme presets: *Cozy Rain*, *Lo-Fi Cafe*, *Deep Forest*, & *Cyberpunk Neon*
-  - Fullscreen distraction-free mode (`F` shortcut key)
-
-- **📝 Study Targets & Scratchpad:**
-  - Dynamic task checklist with completion progress counter
-  - Auto-saved scratchpad for quick formulas, doubt questions, and study notes
-
----
-
-## 📁 File Structure
 
 ```
-deep-focus-app/
-├── index.html            # Main UI HTML Structure & Layout
-├── README.md             # Project Documentation
-├── css/
-│   └── main.css          # Glassmorphism & Custom Themes
-└── js/
-    ├── audioEngine.js    # Web Audio API Procedural Synthesizer
-    ├── rainCanvas.js     # HTML5 Animated Ambient Canvas
-    ├── pomodoro.js       # Focus Timer & Session Tracker
-    ├── soundboard.js     # Volume Sliders & Master Mute Control
-    ├── scratchpad.js     # Study Tasks & Notes LocalStorage Manager
-    ├── themes.js         # Visual Theme Switcher & Fullscreen
-    ├── quotes.js         # Rotating Motivational Quotes
-    └── app.js            # Main Initialization Entrypoint
-```
-
----
-
-## 🚀 How to Run
-
-1. Open [`index.html`](file:///E:/Vidushi_Learning/deep-focus-app/index.html) directly in any web browser.
-2. Or start a local server: `python -m http.server 8080` and navigate to `http://localhost:8080`.
-             
-Developed for **Vidushi Learning**.             
