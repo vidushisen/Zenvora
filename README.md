@@ -39,16 +39,16 @@
 🌿 Soundscapes & Key Features 🌿
 </div>
 <br/>
-* 🌧️ **Layered Nature Soundscapes**  
+* 🌧️ ** Layered Nature Soundscapes ** =  
   Independently mix cozy rain, thunder rumbles, forest wind, bird calls, and fireplace crackles.
 <br/>
-* 🧘 **432Hz Meditation & Lo-Fi**  
+* 🧘 ** 432Hz Meditation & Lo-Fi ** =  
   Harmonic healing frequency vibrations and lo-fi synth pads to stimulate alpha brainwaves.
 <br/>
-* ⏱️ **Aesthetic Pomodoro Timer**  
+* ⏱️ ** Aesthetic Pomodoro Timer ** =  
   25/5 interval focus cycles with animated progress rings and peaceful completion chimes.
 <br/>
-* 📝 **Study Targets & Scratchpad**  
+* 📝 ** Study Targets & Scratchpad ** =  
   Built-in task checklist and quick note scratchpad saved automatically in local browser memory.
 <br/><br/>
 <div align="center">
